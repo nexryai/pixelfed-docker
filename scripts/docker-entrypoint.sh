@@ -13,7 +13,7 @@ then
     php artisan storage:link
     php artisan migrate --force
     php artisan import:cities
-    php artisan instance:actor
+    #php artisan instance:actor
     php artisan passport:keys
 
     php artisan route:cache
