@@ -1,0 +1,1 @@
+* * * * * pixelfed /usr/local/bin/php /opt/pixelfed/artisan schedule:run
