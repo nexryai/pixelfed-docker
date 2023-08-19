@@ -14,7 +14,10 @@ then
     php artisan migrate --force
     php artisan import:cities
     #php artisan instance:actor
+
+    set +e
     php artisan passport:keys
+    set -e
 
     php artisan route:cache
     php artisan view:cache
