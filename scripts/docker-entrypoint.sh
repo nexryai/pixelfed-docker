@@ -7,7 +7,7 @@
 if [ ! -f /opt/pixelfed/.env ]
 then
     cd /opt/pixelfed
-    cp /config.env .env
+    cp ./config.env .env
 
     php artisan key:generate
     php artisan storage:link
