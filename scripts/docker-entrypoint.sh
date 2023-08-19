@@ -13,9 +13,9 @@ then
     php artisan storage:link
     php artisan migrate --force
     php artisan import:cities
-    #php artisan instance:actor
 
     set +e
+    php artisan instance:actor
     php artisan passport:keys
     set -e
 
