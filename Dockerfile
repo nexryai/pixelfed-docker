@@ -5,7 +5,7 @@ WORKDIR /opt/pixelfed
 RUN useradd -rU -s /bin/bash pixelfed
 
 RUN apt-get update \
-    && apt-get -y install cron libicu-dev libjpeg62-turbo-dev libpng-dev libwebp-dev libzip-dev supervisor nginx git \
+    && apt-get -y install cron libicu-dev libjpeg62-turbo-dev libpq-dev libpng-dev libwebp-dev libzip-dev supervisor nginx git \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
     && git clone https://github.com/pixelfed/pixelfed . \
@@ -19,7 +19,7 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && mv composer.phar /usr/local/bin/composer
 
 RUN docker-php-ext-configure gd --with-jpeg --with-webp \
-    && docker-php-ext-install bcmath exif gd intl mysqli pcntl pdo_mysql zip \
+    && docker-php-ext-install bcmath exif gd intl mysqli pcntl pdo_mysql pdo_pgsql zip \
     && pecl install redis && docker-php-ext-enable redis
 
 RUN composer install --no-ansi --no-interaction --optimize-autoloader
