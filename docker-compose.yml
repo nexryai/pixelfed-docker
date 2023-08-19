@@ -1,25 +1,27 @@
----
 version: '3'
 
-# In order to set configuration, please use a .env file in
-# your compose project directory (the same directory as your
-# docker-compose.yml), and set database options, application
-# name, key, and other settings there.
-# A list of available settings is available in .env.example
-#
-# The services should scale properly across a swarm cluster
-# if the volumes are properly shared between cluster members.
-
 services:
-## App and Worker
   app:
-    # Comment to use dockerhub image
     image: nexryai/pixelfed
     restart: unless-stopped
-    #env_file:
-    #  - .env
     volumes:
-      - ./storage:/opt/pixelfed/storage
-      - ./config.env:/opt/pixelfed/config.env
+      - storage:/opt/pixelfed/storage
+      - bootstrap:/opt/pixelfed/bootstrap
+      - ./config.env:/opts/pixelfed/config.env
     ports:
-      - "3000:80"
+      - "127.0.0.1:3000:80"
+
+volumes:
+  storage:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /path/to/data/storage
+
+  bootstrap:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /path/to/data/bootstrap
