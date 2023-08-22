@@ -9,7 +9,7 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
     && git clone https://github.com/pixelfed/pixelfed . \
-    && git checkout v0.11.8 \
+    && git checkout v0.11.9 \
     && apt-get -y purge git
 
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
