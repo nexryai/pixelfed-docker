@@ -1,1 +1,32 @@
 # pixelfed-docker
+
+## Deploy with docker compose
+```
+version: '3'
+
+services:
+  app:
+    image: nexryai/pixelfed
+    restart: unless-stopped
+    volumes:
+      - storage:/opt/pixelfed/storage
+      - bootstrap:/opt/pixelfed/bootstrap
+      - ./config.env:/opts/pixelfed/config.env
+    ports:
+      - "127.0.0.1:3000:80"
+
+volumes:
+  storage:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /path/to/data/storage
+
+  bootstrap:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /path/to/data/bootstrap
+```
