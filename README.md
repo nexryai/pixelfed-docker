@@ -13,7 +13,7 @@ services:
       - bootstrap:/opt/pixelfed/bootstrap
       - ./config.env:/opts/pixelfed/config.env
     ports:
-      - "127.0.0.1:3000:80"
+      - "127.0.0.1:3000:88"
 
 volumes:
   storage:
