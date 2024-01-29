@@ -1,4 +1,4 @@
-FROM php:8.3-fpm-alpine
+FROM php:8.3.0-fpm-alpine
 
 WORKDIR /opt/pixelfed
 
