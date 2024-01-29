@@ -1,13 +1,11 @@
-FROM php:8.2-fpm
+FROM php:8.3-fpm-alpine
 
 WORKDIR /opt/pixelfed
 
-RUN apt-get update \
-    && apt-get install -y ca-certificates \
-    && sed -i.bak -r 's!(deb|deb-src) \S+!\1 https://mirrors.xtom.com.hk/ubuntu/!' /etc/apt/sources.list \
-    && apt-get update \
-    && apt-get -y install cron libjpeg62-turbo libpq libpng libwebp libzip libicu-dev libjpeg62-turbo-dev libpq-dev libpng-dev libwebp-dev libzip-dev supervisor nginx git \
-    && useradd -rU -s /bin/bash pixelfed \
+RUN sed -i 's#https\?://dl-cdn.alpinelinux.org/alpine#https://mirrors.xtom.com.hk/alpine#g' /etc/apk/repositories \
+    && apk add --no-cache ca-certificates cron icu libjpeg-turbo libpq libpng libwebp libzip icu-dev libjpeg-turbo-dev libpq-dev libpng-dev libwebp-dev libzip-dev supervisor nginx git \
+    && addgroup -g 999 pixelfed \
+    && adduser -u 999 -G pixelfed --disabled-password --no-create-home pixelfed \
     && git clone https://github.com/pixelfed/pixelfed . \
     && git checkout v0.11.9 \
     && php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
@@ -19,10 +17,7 @@ RUN apt-get update \
     && docker-php-ext-install bcmath exif gd intl mysqli pcntl pdo_mysql pdo_pgsql zip \
     && pecl install redis && docker-php-ext-enable redis \
     && composer install --no-ansi --no-interaction --optimize-autoloader \
-    && apt-get -y purge git libjpeg62-turbo-dev libpq-dev libpng-dev libwebp-dev libzip-dev \
-    && apt-get autoremove --purge -y \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* \
+    && apk del git icu-dev libjpeg-turbo-dev libpq-dev libpng-dev libwebp-dev libzip-dev \
     && rm -rf .git
 
 COPY ./configs/php.ini /usr/local/etc/php
