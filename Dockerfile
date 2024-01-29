@@ -4,8 +4,8 @@ WORKDIR /opt/pixelfed
 
 RUN sed -i 's#https\?://dl-cdn.alpinelinux.org/alpine#https://mirrors.xtom.com.hk/alpine#g' /etc/apk/repositories \
     && apk add --no-cache ca-certificates icu libjpeg-turbo libpq libpng libwebp libzip icu-dev libjpeg-turbo-dev libpq-dev libpng-dev libwebp-dev libzip-dev supervisor nginx git \
-    && addgroup -g 999 pixelfed \
-    && adduser -u 999 -G pixelfed --disabled-password --no-create-home pixelfed \
+    && addgroup -g 989 pixelfed \
+    && adduser -u 989 -G pixelfed --disabled-password --no-create-home pixelfed \
     && git clone https://github.com/pixelfed/pixelfed . \
     && git checkout v0.11.9 \
     && php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
@@ -24,7 +24,7 @@ COPY ./configs/php.ini /usr/local/etc/php
 COPY ./configs/php-fpm.conf /usr/local/etc/php-fpm.d/www.conf
 COPY ./configs/supervisord.conf /etc/supervisor
 COPY ./configs/supervisor-fpm.conf ./configs/supervisor-horizon.conf ./configs/supervisor-cron.conf ./configs/supervisor-nginx.conf /etc/supervisor/conf.d
-COPY ./configs/cron-pixelfed /etc/cron.d/pixelfed
+COPY ./configs/cron-pixelfed /var/spool/cron/crontabs/pixelfed
 COPY ./configs/nginx.conf /etc/nginx/nginx.conf
 COPY ./scripts/docker-entrypoint.sh /
 
