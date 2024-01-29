@@ -3,7 +3,7 @@ FROM php:8.3-fpm-alpine
 WORKDIR /opt/pixelfed
 
 RUN sed -i 's#https\?://dl-cdn.alpinelinux.org/alpine#https://mirrors.xtom.com.hk/alpine#g' /etc/apk/repositories \
-    && apk add --no-cache ca-certificates cron icu libjpeg-turbo libpq libpng libwebp libzip icu-dev libjpeg-turbo-dev libpq-dev libpng-dev libwebp-dev libzip-dev supervisor nginx git \
+    && apk add --no-cache ca-certificates icu libjpeg-turbo libpq libpng libwebp libzip icu-dev libjpeg-turbo-dev libpq-dev libpng-dev libwebp-dev libzip-dev supervisor nginx git \
     && addgroup -g 999 pixelfed \
     && adduser -u 999 -G pixelfed --disabled-password --no-create-home pixelfed \
     && git clone https://github.com/pixelfed/pixelfed . \
