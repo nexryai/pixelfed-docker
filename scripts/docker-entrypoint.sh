@@ -28,7 +28,7 @@ then
 fi
 
 # Run supervisor
-supervisord -c /etc/supervisor/supervisord.conf
+supervisord -c /etc/supervisord.conf
 
 # execute a command given by CMD
 # exec "$@"
