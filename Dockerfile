@@ -22,8 +22,7 @@ RUN sed -i 's#https\?://dl-cdn.alpinelinux.org/alpine#https://mirrors.xtom.com.h
 
 COPY ./configs/php.ini /usr/local/etc/php
 COPY ./configs/php-fpm.conf /usr/local/etc/php-fpm.d/www.conf
-COPY ./configs/supervisord.conf /etc/supervisor
-COPY ./configs/supervisor-fpm.conf ./configs/supervisor-horizon.conf ./configs/supervisor-cron.conf ./configs/supervisor-nginx.conf /etc/supervisor/conf.d
+COPY ./configs/supervisord.conf /etc/supervisord.conf
 COPY ./configs/cron-pixelfed /var/spool/cron/crontabs/pixelfed
 COPY ./configs/nginx.conf /etc/nginx/nginx.conf
 COPY ./scripts/docker-entrypoint.sh /
