@@ -3,7 +3,7 @@ FROM php:8.3-fpm-alpine
 WORKDIR /opt/pixelfed
 
 RUN sed -i 's#https\?://dl-cdn.alpinelinux.org/alpine#https://mirrors.xtom.com.hk/alpine#g' /etc/apk/repositories \
-    && apk add --no-cache ca-certificates autoconf icu libjpeg-turbo libpq libpng libwebp libzip icu-dev libjpeg-turbo-dev libpq-dev libpng-dev libwebp-dev libzip-dev supervisor nginx git \
+    && apk add --no-cache ca-certificates autoconf alpine-sdk g++ build-base cmake clang icu libjpeg-turbo libpq libpng libwebp libzip icu-dev libjpeg-turbo-dev libpq-dev libpng-dev libwebp-dev libzip-dev supervisor nginx git \
     && addgroup -g 989 pixelfed \
     && adduser -u 989 -G pixelfed --disabled-password --no-create-home pixelfed \
     && git clone https://github.com/pixelfed/pixelfed . \
@@ -17,7 +17,7 @@ RUN sed -i 's#https\?://dl-cdn.alpinelinux.org/alpine#https://mirrors.xtom.com.h
     && docker-php-ext-install bcmath exif gd intl mysqli pcntl pdo_mysql pdo_pgsql zip \
     && pecl install redis && docker-php-ext-enable redis \
     && composer install --no-ansi --no-interaction --optimize-autoloader \
-    && apk del autoconf git icu-dev libjpeg-turbo-dev libpq-dev libpng-dev libwebp-dev libzip-dev \
+    && apk del autoconf alpine-sdk g++ build-base cmake clang git icu-dev libjpeg-turbo-dev libpq-dev libpng-dev libwebp-dev libzip-dev \
     && rm -rf .git
 
 COPY ./configs/php.ini /usr/local/etc/php
