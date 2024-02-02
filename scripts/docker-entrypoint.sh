@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/sh -e
 
 #chown -R pixelfed:pixelfed .
 #find . -type d -exec chmod 755 {} \; # set all directories to rwx by user/group
