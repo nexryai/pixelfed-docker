@@ -7,7 +7,7 @@ RUN sed -i 's#https\?://dl-cdn.alpinelinux.org/alpine#https://mirrors.xtom.com.h
     && addgroup -g 989 pixelfed \
     && adduser -u 989 -G pixelfed --disabled-password --no-create-home pixelfed \
     && git clone https://github.com/pixelfed/pixelfed . \
-    && git checkout v0.11.9 \
+    && git checkout v0.11.11 \
     && php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && php -r "if (hash_file('sha384', 'composer-setup.php') === 'e21205b207c3ff031906575712edab6f13eb0b361f2085f1f1237b7126d785e826a450292b6cfd1d64d92e6563bbde02') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" \
     && php composer-setup.php \
