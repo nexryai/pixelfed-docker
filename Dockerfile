@@ -7,7 +7,7 @@ RUN sed -i 's#https\?://dl-cdn.alpinelinux.org/alpine#https://mirrors.xtom.com.h
     && addgroup -g 989 pixelfed \
     && adduser -u 989 -G pixelfed --disabled-password --no-create-home pixelfed \
     && git clone https://github.com/pixelfed/pixelfed . \
-    && git checkout v0.11.11 \
+    && git checkout v0.11.12 \
     && php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && php composer-setup.php \
     && php -r "unlink('composer-setup.php');" \
