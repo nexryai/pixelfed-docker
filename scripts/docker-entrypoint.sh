@@ -25,6 +25,10 @@ then
 
     php artisan horizon:install
     php artisan horizon:publish
+
+    chown -R pixelfed:pixelfed .
+    find . -type d -exec chmod 755 {} \; # set all directories to rwx by user/group
+    find . -type f -exec chmod 644 {} \; # set all files to rw by user/group
 fi
 
 # Run supervisor
