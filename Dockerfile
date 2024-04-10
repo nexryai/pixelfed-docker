@@ -17,7 +17,8 @@ RUN sed -i 's#https\?://dl-cdn.alpinelinux.org/alpine#https://mirrors.xtom.com.h
     && pecl install redis && docker-php-ext-enable redis \
     && composer install --no-ansi --no-interaction --optimize-autoloader \
     && apk del autoconf alpine-sdk g++ build-base cmake clang git icu-dev libjpeg-turbo-dev libpq-dev libpng-dev libwebp-dev libzip-dev \
-    && rm -rf .git
+    && rm -rf .git \
+    && rm database/migrations/2023_12_04_041631_create_push_subscriptions_table.php
 
 COPY ./configs/php.ini /usr/local/etc/php
 COPY ./configs/php-fpm.conf /usr/local/etc/php-fpm.d/www.conf
