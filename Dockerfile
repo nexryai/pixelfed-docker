@@ -29,6 +29,7 @@ COPY ./scripts/docker-entrypoint.sh /
 
 RUN chmod +x /docker-entrypoint.sh \
     && chown -R pixelfed:pixelfed . \
+    && chown -R pixelfed:pixelfed /var/lib/nginx/ \
     && find . -type d -exec chmod 755 {} \; \
     && find . -type d -exec chmod 755 {} \;
 
